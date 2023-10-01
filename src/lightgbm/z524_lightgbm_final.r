@@ -22,13 +22,13 @@ PARAM$input$dataset <- "./datasets/competencia_02.csv.gz"
 PARAM$input$training <- c(202101, 202102, 202103, 202104, 202105)
 PARAM$input$future <- c(202107) # meses donde se aplica el modelo
 
-PARAM$finalmodel$semilla <- 102191
+PARAM$finalmodel$semilla <- 200177
 
-PARAM$finalmodel$num_iterations <- 4928
-PARAM$finalmodel$learning_rate <- 0.0189943331895954
-PARAM$finalmodel$feature_fraction <- 0.892623977897483
-PARAM$finalmodel$min_data_in_leaf <- 785
-PARAM$finalmodel$num_leaves <- 666
+PARAM$finalmodel$num_iterations <- 3956
+PARAM$finalmodel$learning_rate <- 0.0198174298422438
+PARAM$finalmodel$feature_fraction <- 0.816872434941294
+PARAM$finalmodel$min_data_in_leaf <- 438
+PARAM$finalmodel$num_leaves <- 646
 
 
 PARAM$finalmodel$max_bin <- 31

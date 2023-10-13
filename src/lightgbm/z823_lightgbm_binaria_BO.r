@@ -40,17 +40,18 @@ PARAM$input$dataset <- "./datasets/competencia_02.csv.gz"
 #  mucha magia emerger de esta eleccion
 PARAM$input$testing <- c(202105)
 PARAM$input$validation <- c(202104)
-PARAM$input$training <- c(202010, 202011, 202012, 202101, 202102, 202103)
+PARAM$input$training <- c(201901, 201902, 201903, 201904, 201905, 20106, 201907,
+                          202010, 202011, 202012, 202101, 202102, 202103)
 
 # un undersampling de 0.1  toma solo el 10% de los CONTINUA
 PARAM$trainingstrategy$undersampling <- 1.0
-PARAM$trainingstrategy$semilla_azar <- 102191 # Aqui poner su  primer  semilla
+PARAM$trainingstrategy$semilla_azar <- 874063 # Aqui poner su  primer  semilla
 
 PARAM$hyperparametertuning$POS_ganancia <- 273000
 PARAM$hyperparametertuning$NEG_ganancia <- -7000
 
 # Aqui poner su segunda semilla
-PARAM$lgb_semilla <- 200177
+PARAM$lgb_semilla <- 874009
 #------------------------------------------------------------------------------
 
 # Hiperparametros FIJOS de  lightgbm

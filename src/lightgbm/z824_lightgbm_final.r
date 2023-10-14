@@ -16,21 +16,23 @@ require("lightgbm")
 PARAM <- list()
 PARAM$experimento <- "KA8240"
 
-PARAM$input$dataset <- "./datasets/competencia_02.csv.gz"
+setwd("~/buckets/b1")
+
+PARAM$input$dataset <- "./datasets/competencia_02_v01.csv.gz"
 
 # meses donde se entrena el modelo
 PARAM$input$training <- c(201901, 201902, 201903, 201904, 201905, 20106, 201907,
                           202010, 202011, 202012, 202101, 202102, 202103)
 PARAM$input$future <- c(202107) # meses donde se aplica el modelo
 
-PARAM$finalmodel$semilla <- 874063
+PARAM$finalmodel$semilla <- 874009
 
 # hiperparametros intencionalmente NO optimos
-PARAM$finalmodel$optim$num_iterations <- 730
-PARAM$finalmodel$optim$learning_rate <- 0.0323601846272594
-PARAM$finalmodel$optim$feature_fraction <- 0.909773795582897
-PARAM$finalmodel$optim$min_data_in_leaf <- 4637
-PARAM$finalmodel$optim$num_leaves <- 667
+PARAM$finalmodel$optim$num_iterations <- 683
+PARAM$finalmodel$optim$learning_rate <- 0.0697683730302378
+PARAM$finalmodel$optim$feature_fraction <- 0.0768630279920762
+PARAM$finalmodel$optim$min_data_in_leaf <- 4463
+PARAM$finalmodel$optim$num_leaves <- 1022
 
 
 # Hiperparametros FIJOS de  lightgbm
@@ -177,7 +179,7 @@ setorder(tb_entrega, -prob)
 # suba TODOS los archivos a Kaggle
 # espera a la siguiente clase sincronica en donde el tema sera explicado
 
-cortes <- seq(8000, 15000, by = 500)
+cortes <- seq(8000, 15000, by = 200)
 for (envios in cortes) {
   tb_entrega[, Predicted := 0L]
   tb_entrega[1:envios, Predicted := 1L]

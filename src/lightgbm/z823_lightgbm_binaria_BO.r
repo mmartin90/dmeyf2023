@@ -34,6 +34,8 @@ PARAM <- list()
 
 PARAM$experimento <- "HT8230"
 
+setwd("~/buckets/b1")
+
 PARAM$input$dataset <- "./datasets/competencia_02_v01.csv.gz"
 
 # los meses en los que vamos a entrenar

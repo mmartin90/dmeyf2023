@@ -21,7 +21,7 @@ require("mlrMBO")
 # Defino la  Optimizacion Bayesiana
 PARAM <- list()
 
-PARAM$home <- "~/buckets/b1/"
+PARAM$home <- "~/buckets/b1/" ## cambiar el home
 
 PARAM$experimento <- "HT3440"
 
@@ -30,18 +30,18 @@ PARAM$experimento <- "HT3440"
 PARAM$semilla_azar <- c(
   102191, 200177, 410551, 552581, 892237,
   753587, 247759, 253369, 955127, 800519
-)
+) ## poner semillas
 
 # folds del cross validation
 PARAM$xval_folds <- 5
 
 # cantidad de iteraciones de la Optimizacion Bayesiana
-PARAM$BO_iter <- 300
+PARAM$BO_iter <- 300 ## con 150 estariamos bien
 
 # la letra L al final de 1L significa ENTERO
 PARAM$hs <- makeParamSet(
-  makeNumericParam("cp", lower = -1, upper = 0.1),
-  makeIntegerParam("minsplit", lower = 1L, upper = 8000L),
+  makeNumericParam("cp", lower = -1, upper = 0.1), ## no quiero explorar cp porque no sirve demasiado.
+  makeIntegerParam("minsplit", lower = 1L, upper = 8000L), ## tiene sentido subirlo mas? De todos modos es mas inteligente asi que se queda en zonas para explorar.
   makeIntegerParam("minbucket", lower = 1L, upper = 4000L),
   makeIntegerParam("maxdepth", lower = 3L, upper = 20L),
   forbidden = quote(minbucket > 0.5 * minsplit)

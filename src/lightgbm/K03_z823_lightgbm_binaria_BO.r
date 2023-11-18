@@ -32,19 +32,17 @@ options(error = function() {
 #  muy pronto esto se leera desde un archivo formato .yaml
 PARAM <- list()
 
-PARAM$experimento <- "HT8231"
+PARAM$experimento <- "HT8232"
 
 setwd("~/buckets/b1")
 
-PARAM$input$dataset <- "./datasets/competencia_03.csv.gz"
+PARAM$input$dataset <- "./datasets/competencia_03_baseline.csv.gz"
 
 # los meses en los que vamos a entrenar
 #  mucha magia emerger de esta eleccion
-PARAM$input$testing <- c(202107)
-PARAM$input$validation <- c(202106)
-PARAM$input$training <- c(201901, 201902, 201903, 201904, 201905, 202906,
-  201907, 201908, 201908, 201909, 201910, 201911, 201912, 202001, 202002,
-  202010, 202011, 202012, 202101, 202102, 202103, 202104, 202105)
+PARAM$input$testing <- c(202106)
+PARAM$input$validation <- c(202105)
+PARAM$input$training <- c(202011, 202012, 202101, 202102, 202103, 202104)
 
 # un undersampling de 0.1  toma solo el 10% de los CONTINUA
 PARAM$trainingstrategy$undersampling <- 1.0

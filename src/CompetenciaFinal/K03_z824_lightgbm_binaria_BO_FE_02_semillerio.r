@@ -12,7 +12,7 @@ require("lightgbm")
 PARAM <- list()
 
 # Nombre del experimento
-PARAM$experimento <- "HT8232_comp3_02_sem" 
+PARAM$experimento <- "HT8232_comp3_cCA_50pct_sem" 
 
 # Path donde se aloja el dataset (puede cargar su dataset preprocesado o puede hacerlo en el apartado de preprocesamiento de abajo)
 PARAM$input$dataset <- "./datasets/competencia_03_FE_02.csv.gz"
@@ -39,11 +39,11 @@ semillas <- c(
 )
 
 # Parámetros fijos obtenidos en la Optimización Bayesiana 
-PARAM$finalmodel$num_iterations <- 364
-PARAM$finalmodel$learning_rate <- 0.118712124637801
-PARAM$finalmodel$feature_fraction <- 0.843917372635813
-PARAM$finalmodel$min_data_in_leaf <- 12220
-PARAM$finalmodel$num_leaves <- 512
+PARAM$finalmodel$num_iterations <- 1868
+PARAM$finalmodel$learning_rate <- 0.0315356892794215
+PARAM$finalmodel$feature_fraction <- 0.821043459761003
+PARAM$finalmodel$min_data_in_leaf <- 37521
+PARAM$finalmodel$num_leaves <- 911
 PARAM$finalmodel$max_bin <- 31
 
 #----------------------------------------------CARGAR DATOS---------------------------------------------#
@@ -56,7 +56,35 @@ dataset <- fread(PARAM$input$dataset, stringsAsFactors = TRUE)
 
 #---------------------------------PREPROCESAMIENTO DE DATOS---------------------------------------------#
 # Catastrophe Analysis  
+dataset[foto_mes == 201901, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201901, mtransferencias_recibidas := NA]
 
+dataset[foto_mes == 201902, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201902, mtransferencias_recibidas := NA]
+
+dataset[foto_mes == 201903, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201903, mtransferencias_recibidas := NA]
+
+dataset[foto_mes == 201904, ctarjeta_visa_debitos_automaticos := NA]
+dataset[foto_mes == 201904, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201904, mtransferencias_recibidas := NA]
+dataset[foto_mes == 201904, mttarjeta_visa_debitos_automaticos := NA]
+dataset[foto_mes == 201904, Visa_mfinanciacion_limite := NA]
+
+dataset[foto_mes == 201910, ccajeros_propios_descuentos := NA]
+dataset[foto_mes == 201910, ccomisiones_otras := NA]
+dataset[foto_mes == 201910, chomebanking_transacciones := NA]
+dataset[foto_mes == 201910, ctarjeta_master_descuentos := NA]
+dataset[foto_mes == 201910, ctarjeta_visa_descuentos := NA]
+dataset[foto_mes == 201910, mactivos_margen := NA]
+dataset[foto_mes == 201910, mcajeros_propios_descuentos := NA]
+dataset[foto_mes == 201910, mcomisiones := NA]
+dataset[foto_mes == 201910, mcomisiones_otras := NA]
+dataset[foto_mes == 201910, mpasivos_margen := NA]
+dataset[foto_mes == 201910, mrentabilidad_annual := NA]
+dataset[foto_mes == 201910, mrentabilidad := NA]
+dataset[foto_mes == 201910, mtarjeta_master_descuentos := NA]
+dataset[foto_mes == 201910, mtarjeta_visa_descuentos := NA]
 # Data Drifting
 
 # Feature Engineering Historico  

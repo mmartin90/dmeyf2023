@@ -212,7 +212,7 @@ fwrite(predicciones, file = archivo_salida, sep = ",")
 #-----------------------------------------------GENERO ENSEMBLE---------------------------------------------------#
 
 # Calcular el promedio de las predicciones (probas) de los 100 modelos ejecutados (excluyo cols "numero_de_cliente" y "foto_mes")
-predicciones[, proba_ensemble] <- rowMeans(predicciones[, .SD, .SDcols = -(1:2)])
+predicciones$proba_ensemble <- rowMeans(predicciones[, .SD, .SDcols = -(1:2)])
 setorder(predicciones, -proba_ensemble)
 
 

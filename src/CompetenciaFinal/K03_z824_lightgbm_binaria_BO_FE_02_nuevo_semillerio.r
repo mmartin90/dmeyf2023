@@ -36,8 +36,90 @@ semillas <- c(
   760097, 552207, 339383, 779399, 680047
 )
 
+# aplico el modelo a los datos sin clase
+dapply <- dataset[foto_mes == PARAM$input$future]
+
 # Selecciono columna con numero de cliente y foto mes en df para guardar las predicciones
 predicciones <- dapply[, list(numero_de_cliente, foto_mes)]
+
+# Aqui empieza el programa
+setwd("~/buckets/b1")
+
+# cargo el dataset donde voy a entrenar
+dataset <- fread(PARAM$input$dataset, stringsAsFactors = TRUE)
+
+
+# Catastrophe Analysis  -------------------------------------------------------
+# deben ir cosas de este estilo
+
+dataset[foto_mes == 201901, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201901, mtransferencias_recibidas := NA]
+
+dataset[foto_mes == 201902, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201902, mtransferencias_recibidas := NA]
+
+dataset[foto_mes == 201903, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201903, mtransferencias_recibidas := NA]
+
+dataset[foto_mes == 201904, ctarjeta_visa_debitos_automaticos := NA]
+dataset[foto_mes == 201904, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201904, mtransferencias_recibidas := NA]
+dataset[foto_mes == 201904, mttarjeta_visa_debitos_automaticos := NA]
+dataset[foto_mes == 201904, Visa_mfinanciacion_limite := NA]
+
+dataset[foto_mes == 201910, ccajeros_propios_descuentos := NA]
+dataset[foto_mes == 201910, ccomisiones_otras := NA]
+dataset[foto_mes == 201910, chomebanking_transacciones := NA]
+dataset[foto_mes == 201910, ctarjeta_master_descuentos := NA]
+dataset[foto_mes == 201910, ctarjeta_visa_descuentos := NA]
+dataset[foto_mes == 201910, mactivos_margen := NA]
+dataset[foto_mes == 201910, mcajeros_propios_descuentos := NA]
+dataset[foto_mes == 201910, mcomisiones := NA]
+dataset[foto_mes == 201910, mcomisiones_otras := NA]
+dataset[foto_mes == 201910, mpasivos_margen := NA]
+dataset[foto_mes == 201910, mrentabilidad_annual := NA]
+dataset[foto_mes == 201910, mrentabilidad := NA]
+dataset[foto_mes == 201910, mtarjeta_master_descuentos := NA]
+dataset[foto_mes == 201910, mtarjeta_visa_descuentos := NA]
+
+# Data Drifting
+# por ahora, no hago nada
+
+
+# Feature Engineering Historico  ----------------------------------------------
+#   aqui deben calcularse los  lags y  lag_delta
+#   Sin lags no hay paraiso ! corta la bocha
+#   https://rdrr.io/cran/data.table/man/shift.html
+
+
+#--------------------------------------
+
+# paso la clase a binaria que tome valores {0,1}  enteros
+# set trabaja con la clase  POS = { BAJA+1, BAJA+2 }
+# esta estrategia es MUY importante
+dataset[, clase01 := ifelse(clase_ternaria %in% c("BAJA+2", "BAJA+1"), 1L, 0L)]
+
+#--------------------------------------
+
+# los campos que se van a utilizar
+campos_buenos <- setdiff(colnames(dataset), c("clase_ternaria", "clase01"))
+
+#--------------------------------------
+
+
+# establezco donde entreno
+dataset[, train := 0L]
+dataset[foto_mes %in% PARAM$input$training, train := 1L]
+
+#--------------------------------------
+# creo las carpetas donde van los resultados
+# creo la carpeta donde va el experimento
+dir.create("./exp/", showWarnings = FALSE)
+dir.create(paste0("./exp/", PARAM$experimento, "/"), showWarnings = FALSE)
+
+# Establezco el Working Directory DEL EXPERIMENTO
+setwd(paste0("./exp/", PARAM$experimento, "/"))
+
 
 for (semilla in semillas) {
 
@@ -83,87 +165,6 @@ for (semilla in semillas) {
   )
 
 
-  #------------------------------------------------------------------------------
-  #------------------------------------------------------------------------------
-  # Aqui empieza el programa
-  setwd("~/buckets/b1")
-
-  # cargo el dataset donde voy a entrenar
-  dataset <- fread(PARAM$input$dataset, stringsAsFactors = TRUE)
-
-
-  # Catastrophe Analysis  -------------------------------------------------------
-  # deben ir cosas de este estilo
-
-  dataset[foto_mes == 201901, ctransferencias_recibidas := NA]
-  dataset[foto_mes == 201901, mtransferencias_recibidas := NA]
-
-  dataset[foto_mes == 201902, ctransferencias_recibidas := NA]
-  dataset[foto_mes == 201902, mtransferencias_recibidas := NA]
-
-  dataset[foto_mes == 201903, ctransferencias_recibidas := NA]
-  dataset[foto_mes == 201903, mtransferencias_recibidas := NA]
-
-  dataset[foto_mes == 201904, ctarjeta_visa_debitos_automaticos := NA]
-  dataset[foto_mes == 201904, ctransferencias_recibidas := NA]
-  dataset[foto_mes == 201904, mtransferencias_recibidas := NA]
-  dataset[foto_mes == 201904, mttarjeta_visa_debitos_automaticos := NA]
-  dataset[foto_mes == 201904, Visa_mfinanciacion_limite := NA]
-
-  dataset[foto_mes == 201910, ccajeros_propios_descuentos := NA]
-  dataset[foto_mes == 201910, ccomisiones_otras := NA]
-  dataset[foto_mes == 201910, chomebanking_transacciones := NA]
-  dataset[foto_mes == 201910, ctarjeta_master_descuentos := NA]
-  dataset[foto_mes == 201910, ctarjeta_visa_descuentos := NA]
-  dataset[foto_mes == 201910, mactivos_margen := NA]
-  dataset[foto_mes == 201910, mcajeros_propios_descuentos := NA]
-  dataset[foto_mes == 201910, mcomisiones := NA]
-  dataset[foto_mes == 201910, mcomisiones_otras := NA]
-  dataset[foto_mes == 201910, mpasivos_margen := NA]
-  dataset[foto_mes == 201910, mrentabilidad_annual := NA]
-  dataset[foto_mes == 201910, mrentabilidad := NA]
-  dataset[foto_mes == 201910, mtarjeta_master_descuentos := NA]
-  dataset[foto_mes == 201910, mtarjeta_visa_descuentos := NA]
-
-  # Data Drifting
-  # por ahora, no hago nada
-
-
-  # Feature Engineering Historico  ----------------------------------------------
-  #   aqui deben calcularse los  lags y  lag_delta
-  #   Sin lags no hay paraiso ! corta la bocha
-  #   https://rdrr.io/cran/data.table/man/shift.html
-
-
-  #--------------------------------------
-
-  # paso la clase a binaria que tome valores {0,1}  enteros
-  # set trabaja con la clase  POS = { BAJA+1, BAJA+2 }
-  # esta estrategia es MUY importante
-  dataset[, clase01 := ifelse(clase_ternaria %in% c("BAJA+2", "BAJA+1"), 1L, 0L)]
-
-  #--------------------------------------
-
-  # los campos que se van a utilizar
-  campos_buenos <- setdiff(colnames(dataset), c("clase_ternaria", "clase01"))
-
-  #--------------------------------------
-
-
-  # establezco donde entreno
-  dataset[, train := 0L]
-  dataset[foto_mes %in% PARAM$input$training, train := 1L]
-
-  #--------------------------------------
-  # creo las carpetas donde van los resultados
-  # creo la carpeta donde va el experimento
-  dir.create("./exp/", showWarnings = FALSE)
-  dir.create(paste0("./exp/", PARAM$experimento, "/"), showWarnings = FALSE)
-
-  # Establezco el Working Directory DEL EXPERIMENTO
-  setwd(paste0("./exp/", PARAM$experimento, "/"))
-
-
 
   # dejo los datos en el formato que necesita LightGBM
   dtrain <- lgb.Dataset(
@@ -192,10 +193,6 @@ for (semilla in semillas) {
   )
 
   #--------------------------------------
-
-
-  # aplico el modelo a los datos sin clase
-  dapply <- dataset[foto_mes == PARAM$input$future]
 
   # aplico el modelo a los datos nuevos
   prediccion <- predict(

@@ -18,7 +18,7 @@ PARAM$experimento <- "KA8240"
 
 setwd("~/buckets/b1")
 
-PARAM$input$dataset <- "./datasets/competencia_02_v01.csv.gz"
+PARAM$input$dataset <- "./datasets/competencia_03_FE_02.csv.gz"
 
 # meses donde se entrena el modelo
 PARAM$input$training <- c(

@@ -36,18 +36,17 @@ semillas <- c(
   760097, 552207, 339383, 779399, 680047
 )
 
-# aplico el modelo a los datos sin clase
-dapply <- dataset[foto_mes == PARAM$input$future]
-
-# Selecciono columna con numero de cliente y foto mes en df para guardar las predicciones
-predicciones <- dapply[, list(numero_de_cliente, foto_mes)]
-
 # Aqui empieza el programa
 setwd("~/buckets/b1")
 
 # cargo el dataset donde voy a entrenar
 dataset <- fread(PARAM$input$dataset, stringsAsFactors = TRUE)
 
+# aplico el modelo a los datos sin clase
+dapply <- dataset[foto_mes == PARAM$input$future]
+
+# Selecciono columna con numero de cliente y foto mes en df para guardar las predicciones
+predicciones <- dapply[, list(numero_de_cliente, foto_mes)]
 
 # Catastrophe Analysis  -------------------------------------------------------
 # deben ir cosas de este estilo

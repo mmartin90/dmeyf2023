@@ -55,7 +55,8 @@ setwd("~/buckets/b1/")
 dataset <- fread(PARAM$input$dataset, stringsAsFactors = TRUE)
 
 #---------------------------------PREPROCESAMIENTO DE DATOS---------------------------------------------#
-# Catastrophe Analysis  
+# Catastrophe Analysis
+
 dataset[foto_mes == 201901, ctransferencias_recibidas := NA]
 dataset[foto_mes == 201901, mtransferencias_recibidas := NA]
 

@@ -36,7 +36,7 @@ PARAM$experimento <- "HT8232_comp3_20ntile"
 
 setwd("~/buckets/b1")
 
-PARAM$input$dataset <- "./datasets/competencia_03_ntile.csv.gz"
+PARAM$input$dataset <- "./datasets/competencia_03_reduc.csv.gz"
 
 # los meses en los que vamos a entrenar
 #  mucha magia emerger de esta eleccion

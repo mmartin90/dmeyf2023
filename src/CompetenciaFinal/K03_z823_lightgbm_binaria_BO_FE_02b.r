@@ -32,21 +32,18 @@ options(error = function() {
 #  muy pronto esto se leera desde un archivo formato .yaml
 PARAM <- list()
 
-PARAM$experimento <- "HT8232_comp3_01"
+PARAM$experimento <- "HT8232_comp3_02b"
 
 setwd("~/buckets/b1")
 
-PARAM$input$dataset <- "./datasets/competencia_03_FE_01.csv.gz"
+PARAM$input$dataset <- "./datasets/competencia_03_FE_02.csv.gz"
 
 # los meses en los que vamos a entrenar
 #  mucha magia emerger de esta eleccion
 PARAM$input$testing <- c(202107)
 PARAM$input$validation <- c(202106)
 PARAM$input$training <- c(
-  201901, 201902, 201903, 201904, 201906,
-  201907, 201908, 201909, 201910, 201911, 201912,
-  202010, 202011, 202012,
-  202101, 202102, 202103, 202104, 202105
+  202011, 202012, 202101, 202102, 202103, 202104, 202105
 )
 
 # un undersampling de 0.1  toma solo el 10% de los CONTINUA
@@ -298,7 +295,35 @@ klog <- paste0(PARAM$experimento, ".txt")
 
 # Catastrophe Analysis  -------------------------------------------------------
 # deben ir cosas de este estilo
-#   dataset[foto_mes == 202006, active_quarter := NA]
+dataset[foto_mes == 201901, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201901, mtransferencias_recibidas := NA]
+
+dataset[foto_mes == 201902, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201902, mtransferencias_recibidas := NA]
+
+dataset[foto_mes == 201903, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201903, mtransferencias_recibidas := NA]
+
+dataset[foto_mes == 201904, ctarjeta_visa_debitos_automaticos := NA]
+dataset[foto_mes == 201904, ctransferencias_recibidas := NA]
+dataset[foto_mes == 201904, mtransferencias_recibidas := NA]
+dataset[foto_mes == 201904, mttarjeta_visa_debitos_automaticos := NA]
+dataset[foto_mes == 201904, Visa_mfinanciacion_limite := NA]
+
+dataset[foto_mes == 201910, ccajeros_propios_descuentos := NA]
+dataset[foto_mes == 201910, ccomisiones_otras := NA]
+dataset[foto_mes == 201910, chomebanking_transacciones := NA]
+dataset[foto_mes == 201910, ctarjeta_master_descuentos := NA]
+dataset[foto_mes == 201910, ctarjeta_visa_descuentos := NA]
+dataset[foto_mes == 201910, mactivos_margen := NA]
+dataset[foto_mes == 201910, mcajeros_propios_descuentos := NA]
+dataset[foto_mes == 201910, mcomisiones := NA]
+dataset[foto_mes == 201910, mcomisiones_otras := NA]
+dataset[foto_mes == 201910, mpasivos_margen := NA]
+dataset[foto_mes == 201910, mrentabilidad_annual := NA]
+dataset[foto_mes == 201910, mrentabilidad := NA]
+dataset[foto_mes == 201910, mtarjeta_master_descuentos := NA]
+dataset[foto_mes == 201910, mtarjeta_visa_descuentos := NA]
 
 
 

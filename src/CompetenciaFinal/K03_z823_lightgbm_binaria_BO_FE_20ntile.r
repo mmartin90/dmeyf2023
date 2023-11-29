@@ -295,36 +295,6 @@ klog <- paste0(PARAM$experimento, ".txt")
 
 # Catastrophe Analysis  -------------------------------------------------------
 # deben ir cosas de este estilo
-dataset[foto_mes == 201901, ctransferencias_recibidas := NA]
-dataset[foto_mes == 201901, mtransferencias_recibidas := NA]
-
-dataset[foto_mes == 201902, ctransferencias_recibidas := NA]
-dataset[foto_mes == 201902, mtransferencias_recibidas := NA]
-
-dataset[foto_mes == 201903, ctransferencias_recibidas := NA]
-dataset[foto_mes == 201903, mtransferencias_recibidas := NA]
-
-dataset[foto_mes == 201904, ctarjeta_visa_debitos_automaticos := NA]
-dataset[foto_mes == 201904, ctransferencias_recibidas := NA]
-dataset[foto_mes == 201904, mtransferencias_recibidas := NA]
-dataset[foto_mes == 201904, mttarjeta_visa_debitos_automaticos := NA]
-dataset[foto_mes == 201904, Visa_mfinanciacion_limite := NA]
-
-dataset[foto_mes == 201910, ccajeros_propios_descuentos := NA]
-dataset[foto_mes == 201910, ccomisiones_otras := NA]
-dataset[foto_mes == 201910, chomebanking_transacciones := NA]
-dataset[foto_mes == 201910, ctarjeta_master_descuentos := NA]
-dataset[foto_mes == 201910, ctarjeta_visa_descuentos := NA]
-dataset[foto_mes == 201910, mactivos_margen := NA]
-dataset[foto_mes == 201910, mcajeros_propios_descuentos := NA]
-dataset[foto_mes == 201910, mcomisiones := NA]
-dataset[foto_mes == 201910, mcomisiones_otras := NA]
-dataset[foto_mes == 201910, mpasivos_margen := NA]
-dataset[foto_mes == 201910, mrentabilidad_annual := NA]
-dataset[foto_mes == 201910, mrentabilidad := NA]
-dataset[foto_mes == 201910, mtarjeta_master_descuentos := NA]
-dataset[foto_mes == 201910, mtarjeta_visa_descuentos := NA]
-
 
 
 # Data Drifting

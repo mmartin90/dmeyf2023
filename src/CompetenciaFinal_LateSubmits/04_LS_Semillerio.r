@@ -93,11 +93,11 @@ for (semilla in semillas) {
   PARAM$finalmodel$semilla <- semilla
 
   # hiperparametros intencionalmente NO optimos
-  PARAM$finalmodel$num_iterations <- 209
-  PARAM$finalmodel$learning_rate <- 0.142209129117921
-  PARAM$finalmodel$feature_fraction <- 0.802505482533752
-  PARAM$finalmodel$min_data_in_leaf <- 35295
-  PARAM$finalmodel$num_leaves <- 1021
+  PARAM$finalmodel$num_iterations <- 1158
+  PARAM$finalmodel$learning_rate <- 0.112537658395595
+  PARAM$finalmodel$feature_fraction <- 0.437687777365645
+  PARAM$finalmodel$min_data_in_leaf <- 49510
+  PARAM$finalmodel$num_leaves <- 351
 
   # Hiperparametros FIJOS de  lightgbm
   PARAM$finalmodel$lgb_basicos <- list(
